@@ -1,2 +1,2 @@
 # ecommerce_cli
-CLI Based E- Commerce Application
+CLI Based Ecommerce Application
