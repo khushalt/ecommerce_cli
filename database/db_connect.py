@@ -23,9 +23,6 @@ class Database:
             return self._conn
         except Error as e:
             print("Error while connecting to MySQL", e)
-        finally:
-            if self._conn.is_connected():
-                self.db_close()
 
     def db_close(self):
         if self._conn:
@@ -44,6 +41,5 @@ class Database:
 
 
 db_obj = Database()
-db_connection = db_obj.db_connect()
-print(db_connection)
+db_connection = db_obj.db_connect().cursor(buffered=True)
 """use above connection object throughout application since so many pools slows down"""
