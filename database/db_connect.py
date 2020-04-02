@@ -41,7 +41,3 @@ class Database:
         with open('/home/indictrans/khushal/workspace/ecommerce/ecomm/database/db_config.json', 'r') as db:
             return json.load(db)
 
-
-db_obj = Database()
-db_connection = db_obj.db_connect().cursor(buffered=True)
-"""use above connection object throughout application since so many pools slows down"""

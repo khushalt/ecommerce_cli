@@ -10,4 +10,9 @@ class User(BaseModel):
         self.address = kwargs.get('address')
         self.table = "User"
         self.meta = ('customer_id', 'name', 'email', 'address')
+        print(kwargs)
         super().__init__()
+
+
+user1 = User(customer_id = 2222323, name = 'kdhushsdsal', email='khushalt5@gmail.com', address= 'Pune')
+user1.on_delete()
