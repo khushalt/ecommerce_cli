@@ -1,6 +1,7 @@
 from ecomm.database.db_connect import db_obj, db_connection
-from _collections import  OrderedDict
+from _collections import OrderedDict
 from ordered_set import OrderedSet
+from mysql.connector import Error
 
 
 def create_db():
@@ -10,6 +11,7 @@ def create_db():
         db_obj.execute_query(db_connection, 'use ecommerce')
     else:
         db_obj.execute_query(db_connection, 'create database %s' % db_obj.db_name)
+        db_obj.execute_query(db_connection, 'use ecommerce')
 
 
 def create_tables():
@@ -33,7 +35,11 @@ def create_tables():
 
     })
     for query in tables_to_execute:
-        db_obj.execute_query(db_connection, mapper_.get(query))
+        try:
+            db_obj.execute_query(db_connection, mapper_.get(query))
+        except Error as e:
+            db_obj.db_close()
+            raise e
 
 
 def create_db_schema():

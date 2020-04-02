@@ -1,6 +1,7 @@
 import json
 from mysql.connector import Error, connect
 import logging
+import os
 
 
 class Database:
@@ -22,7 +23,8 @@ class Database:
             )
             return self._conn
         except Error as e:
-            print("Error while connecting to MySQL", e)
+            self.db_close()
+            raise e
 
     def db_close(self):
         if self._conn:
@@ -36,7 +38,7 @@ class Database:
 
     @staticmethod
     def read_db_config():
-        with open('db_config.json', 'r') as db:
+        with open('/home/indictrans/khushal/workspace/ecommerce/ecomm/database/db_config.json', 'r') as db:
             return json.load(db)
 
 
